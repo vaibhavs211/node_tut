@@ -1,10 +1,23 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 // Define mongoDB URL
-const mongoURL = "mongodb://localhost:27017/hotels";
+// const mongoURL = process.env.DB_LOCAL;
+mongoose.set('debug', true);
+// online hosted db
+const mongoURL = process.env.DB_URL;
 
 // Setup mongoDB connection
-mongoose.connect(mongoURL, { });
+mongoose.connect(mongoURL, {
+    tls: true,
+    autoSelectFamily: false,
+    serverSelectionTimeoutMS: 3000,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    ssl: true
+});
+
+// mongoose.connect(mongoURL);
 
 const db = mongoose.connection;
 
@@ -22,4 +35,7 @@ db.on('error', () => {
 
 // Export DB connection
 module.exports = db;
+
+
+
 
