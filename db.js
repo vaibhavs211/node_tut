@@ -3,11 +3,11 @@ require('dotenv').config();
 
 // Define mongoDB URL
 // const mongoURL = process.env.DB_LOCAL;
-mongoose.set('debug', true);
+// mongoose.set('debug', true);
 // online hosted db
 const mongoURL = process.env.DB_URL;
 
-// Setup mongoDB connection
+// Setup mongoDB connection for online db
 mongoose.connect(mongoURL, {
     tls: true,
     autoSelectFamily: false,
@@ -17,7 +17,7 @@ mongoose.connect(mongoURL, {
     ssl: true
 });
 
-// mongoose.connect(mongoURL);
+mongoose.connect(mongoURL,{});
 
 const db = mongoose.connection;
 
